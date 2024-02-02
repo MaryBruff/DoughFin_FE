@@ -4,6 +4,11 @@
 ```bash
 npm run dev
 ```
+## To Run Tests
+```bash
+npx cypress open
+```
+
 
 ## Configuration
 * port deconfliction
