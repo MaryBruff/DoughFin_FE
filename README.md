@@ -2,7 +2,7 @@
 
 ## Start Server
 ```bash
-npm run dev
+npm start
 ```
 ## To Run Tests
 ```bash
@@ -12,5 +12,5 @@ npx cypress open
 
 ## Configuration
 * port deconfliction
-  * vue.js localhost:5173
+  * react app localhost:3003
   * rails api localhost:3000
