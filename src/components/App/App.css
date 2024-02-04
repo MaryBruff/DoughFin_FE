@@ -1,0 +1,8 @@
+.app {
+  display: flex;
+  width: 1440px;
+  height: 1024px;
+  justify-content: center;
+  align-items: flex-start;
+  background: #141332;
+}
