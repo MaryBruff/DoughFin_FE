@@ -1,0 +1,40 @@
+.dashboard {
+  display: flex;
+  width: 1120px;
+  height: 1024px;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.dashboard-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+
+.dashboard-aside {
+  display: flex;
+  height: 859px;
+  padding: 20px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  background: #1D1D41;  
+}
+
+.dashboard-activity-chart {
+  width: 679px;
+  height: 382px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 20px;
+  color: white;
+  background: #1D1D41;
+}
