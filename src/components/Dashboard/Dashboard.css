@@ -1,8 +1,9 @@
 .dashboard {
   display: flex;
-  width: 1120px;
-  height: 1024px;
-  justify-content: center;
+  /* width: 1120px;
+  height: 1024px; */
+  padding: 20px 20px 20px 0px;
+  justify-content: space-between;
   align-items: center;
   gap: 20px;
   flex-shrink: 0;
@@ -29,7 +30,7 @@
 
 .dashboard-activity-chart {
   width: 679px;
-  height: 382px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
