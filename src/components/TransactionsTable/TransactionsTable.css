@@ -109,7 +109,7 @@
 }
 
 .table-scroll {
-  max-height: 180px;
+  max-height: 140px;
   overflow-y: auto;
   width: 100%; 
   margin: 10px 0;
