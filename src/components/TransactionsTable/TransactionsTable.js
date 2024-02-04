@@ -1,9 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './TransactionsTable.css'
 import SearchBarButton from '../../assets/icons/searchbar-button.svg'
 
 
-const TransactionsTable = () => {
+const TransactionsTable = ({income, expenses}) => {
+  const incomeTransactions = income.map(transaction => {
+     return(
+      <tr className='transactions-tr'>
+        <td>{transaction.source}</td>
+        <td>{transaction.date}</td>
+        <td>{transaction.amount}</td>
+        <td className='transactions-status-text'>Deposited</td>
+      </tr>
+     )
+  })
+  const expenseTransactions = expenses.map(transaction => {
+    return(
+     <tr className='transactions-tr'>
+       <td>{transaction.description}</td>
+       <td>{transaction.date}</td>
+       <td>{transaction.amount}</td>
+      <td className='transactions-status-text'>Completed</td>
+     </tr>
+    )
+ })
   return (
     <section className='transactions'>
       <header className='transactions-header'>
@@ -26,55 +46,9 @@ const TransactionsTable = () => {
               <th>Status</th>
             </tr>
           </thead>
-          <tbody >
-            <tr>
-              <td>McDonalds</td>
-              <td>Fri, 19 Apr 2020</td>
-              <td>$8000.69</td>
-              <td className='transactions-status-text'>Deposited</td>
-            </tr>
-            <tr className='transactions-tr'>
-              <td>McDonalds</td>
-              <td>Fri, 19 Apr 2020</td>
-              <td>$8000.69</td>
-              <td className='transactions-status-text'>Deposited</td>
-            </tr>
-            <tr className='transactions-tr'>
-              <td>McDonalds</td>
-              <td>Fri, 19 Apr 2020</td>
-              <td>$8000.69</td>
-              <td className='transactions-status-text'>Deposited</td>
-            </tr>
-            <tr className='transactions-tr'>
-              <td>McDonalds</td>
-              <td>Fri, 19 Apr 2020</td>
-              <td>$8000.69</td>
-              <td className='transactions-status-text'>Deposited</td>
-            </tr>
-            <tr className='transactions-tr'>
-              <td>McDonalds</td>
-              <td>Fri, 19 Apr 2020</td>
-              <td>$8000.69</td>
-              <td className='transactions-status-text'>Deposited</td>
-            </tr>
-            <tr className='transactions-tr'>
-              <td>McDonalds</td>
-              <td>Fri, 19 Apr 2020</td>
-              <td>$8000.69</td>
-              <td className='transactions-status-text'>Deposited</td>
-            </tr>
-            <tr className='transactions-tr'>
-              <td>McDonalds</td>
-              <td>Fri, 19 Apr 2020</td>
-              <td>$8000.69</td>
-              <td className='transactions-status-text'>Deposited</td>
-            </tr>
-            <tr className='transactions-tr'>
-              <td>McDonalds</td>
-              <td>Fri, 19 Apr 2020</td>
-              <td>$8000.69</td>
-              <td className='transactions-status-text'>Deposited</td>
-            </tr>
+          <tbody>
+            {incomeTransactions}
+            {expenseTransactions}
           </tbody>
         </table>
       </div>

@@ -6,7 +6,7 @@ import Budget from '../Budget/Budget'
 import DownArrow from '../../assets/icons/down-arrow.svg'
 import UpArrow from '../../assets/icons/up-arrow.svg'
 
-const Dashboard = ({data}) => {
+const Dashboard = ({income, expenses}) => {
   return (
     <main className='dashboard'>
       <section className='dashboard-section'>
@@ -28,7 +28,7 @@ const Dashboard = ({data}) => {
             arrow={DownArrow}
           />
         </div>
-        <TransactionsTabl data={data} />
+        <TransactionsTable income={income} expenses={expenses} />
       </section>
       <Budget />
     </main>
