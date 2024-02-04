@@ -7,7 +7,7 @@ import GridIcon from '../../assets/icons/grid-icon.svg'
 import SettingsIcon from '../../assets/icons/settings-icon.svg'
 import UserIcon from '../../assets/icons/user-icon.svg'
 
-const NavBar = () => {
+const NavBar = ({userName}) => {
   return (
     <nav className='navbar'>
       <aside className='nav-button-container'>
@@ -38,7 +38,7 @@ const NavBar = () => {
       </aside>
       <section className='user-icon'>
         <img src={UserPic} alt='user icon' />
-        <p className='user-details'>User</p>
+        <p className='user-details'>{userName}</p>
       </section>
     </nav>
   )
