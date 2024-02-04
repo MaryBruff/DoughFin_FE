@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./TransactionsTable.css";
-import SearchBarButton from "../../assets/icons/searchbar-button.svg";
 
 const TransactionsTable = ({ income, expenses }) => {
   const incomeTransactions = income.map((transaction) => {
     return (
-      <tr className="transactions-tr">
+      <tr key={transaction.id}className="transactions-tr">
         <td>{transaction.source}</td>
         <td>{transaction.date}</td>
         <td>${transaction.amount}</td>
@@ -15,7 +14,7 @@ const TransactionsTable = ({ income, expenses }) => {
   });
   const expenseTransactions = expenses.map((transaction) => {
     return (
-      <tr className="transactions-tr">
+      <tr className="transactions-tr" key={transaction.id}>
         <td>{transaction.description}</td>
         <td>{transaction.date}</td>
         <td>${transaction.amount}</td>
@@ -48,9 +47,7 @@ const TransactionsTable = ({ income, expenses }) => {
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            {incomeTransactions}
-            {expenseTransactions}
+          <tbody>{incomeTransactions}{expenseTransactions}
           </tbody>
         </table>
       </div>
