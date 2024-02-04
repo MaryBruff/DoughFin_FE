@@ -2,6 +2,7 @@ import React from 'react'
 import './TransactionsTable.css'
 import SearchBarButton from '../../assets/icons/searchbar-button.svg'
 
+
 const TransactionsTable = () => {
   return (
     <section className='transactions'>
