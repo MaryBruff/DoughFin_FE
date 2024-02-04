@@ -2,6 +2,7 @@ import React from 'react'
 import './Dashboard.css'
 import Total from '../Total/Total'
 import TransactionsTable from '../TransactionsTable/TransactionsTable'
+import Budget from '../Budget/Budget'
 import DownArrow from '../../assets/icons/down-arrow.svg'
 import UpArrow from '../../assets/icons/up-arrow.svg'
 
@@ -27,13 +28,9 @@ const Dashboard = () => {
             arrow={DownArrow}
           />
         </div>
-        <TransactionsTable 
-        
-        />
+        <TransactionsTable />
       </section>
-      <aside className='dashboard-aside'>
-        Aside
-      </aside>
+      <Budget />
     </main>
   )
 }
