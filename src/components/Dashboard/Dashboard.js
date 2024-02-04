@@ -6,7 +6,7 @@ import Budget from '../Budget/Budget'
 import DownArrow from '../../assets/icons/down-arrow.svg'
 import UpArrow from '../../assets/icons/up-arrow.svg'
 
-const Dashboard = () => {
+const Dashboard = ({income, expenses, incomeData, expensesData}) => {
   return (
     <main className='dashboard'>
       <section className='dashboard-section'>
@@ -17,18 +17,18 @@ const Dashboard = () => {
           {/* The Total component will need conditional rendering to for the arrow AND percentage */}
           <Total
             totalType={'Total Income:'}
-            totalAmount={'6132.00'}
-            totalPercentage={'+1.29%'}
+            totalAmount={incomeData.data.currentIncome.amount}
+            totalPercentage={incomeData.data.currentIncome.pctChange.toString()}
             arrow={UpArrow}
           />
           <Total
             totalType={'Total Expenses:'}
-            totalAmount={'53711.00'}
-            totalPercentage={'-1.29%'}
+            totalAmount={expensesData.data.currentExpenses.amount}
+            totalPercentage={expensesData.data.currentExpenses.pctChange.toString()}
             arrow={DownArrow}
           />
         </div>
-        <TransactionsTable />
+        <TransactionsTable income={income} expenses={expenses} />
       </section>
       <Budget />
     </main>

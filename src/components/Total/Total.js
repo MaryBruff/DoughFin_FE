@@ -4,8 +4,7 @@ import UpArrow from '../../assets/icons/up-arrow.svg'
 
 const Total = ({ arrow, totalType, totalAmount, totalPercentage }) => {
   const firstChar = totalPercentage.charAt(0);
-  const percentage = firstChar === '+' ? 'percentage-up' : 'percentage-down'
-
+  const percentage = firstChar === '-' ? 'percentage-down' : 'percentage-up'
   return (
     <summary className='totals-container'>
       <div className='totals-flex'>
@@ -18,7 +17,7 @@ const Total = ({ arrow, totalType, totalAmount, totalPercentage }) => {
         </div>
         <div className={percentage}>
           
-          <p className={`${percentage}-text`}>{totalPercentage}</p>
+          <p className={`${percentage}-text`}>{totalPercentage * 100}%</p>
         </div>
       </div>
     </summary>
