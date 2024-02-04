@@ -1,7 +1,8 @@
 .navbar {
   display: flex;
-  width: 320px;
+  width: 360px;
   height: 100%;
+  margin-right: 20px;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -34,7 +35,7 @@
 
 .user-details {
   color: #FFF;
-  font-size: 20px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -78,7 +79,7 @@
   width: 200px;
   text-align: start;
   color: #FFF;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
