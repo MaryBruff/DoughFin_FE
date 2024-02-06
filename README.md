@@ -28,3 +28,10 @@ npm cypress open
 * port deconfliction
   * react app localhost:3003
   * rails api localhost:3000
+
+
+## Packages Required
+[apollo](https://www.npmjs.com/package/@apollo/client)
+[mui](https://www.npmjs.com/package/@mui/material)
+[graphql](https://www.npmjs.com/package/graphql)
+[cypress](https://www.npmjs.com/package/cypress)
