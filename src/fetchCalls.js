@@ -5,7 +5,7 @@ import {GET_USERS} from "../src/queries/getUser"
 
 
 function FinanceData({ email }) {
-  const {loading, error, data } = useQuery(GET_USERS, {
+  const {loading, error, data } = useQuery(GET_USER, {
     variables: {email},
   })
   if (loading) return null;
