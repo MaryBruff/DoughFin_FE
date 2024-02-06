@@ -8,7 +8,7 @@ const TransactionsTable = ({ income, expenses }) => {
         <td>{transaction.source}</td>
         <td>{transaction.date}</td>
         <td>${transaction.amount}</td>
-        <td className="transactions-status-text">Deposited</td>
+        <td style={{ color: '#02B15A' }}  className="transactions-status-text">Income</td>
       </tr>
     );
   });
@@ -18,7 +18,7 @@ const TransactionsTable = ({ income, expenses }) => {
         <td>{transaction.description}</td>
         <td>{transaction.date}</td>
         <td>${transaction.amount}</td>
-        <td className="transactions-status-text">Completed</td>
+        <td style={{ color: '#E41414' }} className="transactions-status-text">Expense</td>
       </tr>
     );
   });
@@ -44,7 +44,7 @@ const TransactionsTable = ({ income, expenses }) => {
               <th>Name</th>
               <th>Date</th>
               <th>Amount</th>
-              <th>Status</th>
+              <th>Type</th>
             </tr>
           </thead>
           <tbody>{incomeTransactions}{expenseTransactions}
