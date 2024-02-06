@@ -1,14 +1,28 @@
 # DoughFin_FE
 
-## Start Server
+### Setup & Installation
+
+Get **DoughFin** running on your machine:
+
+1. Clone the repository from: `git@github.com:DoughFin/DoughFin_FE.git`
+2. Move to the project directory:
+ ```bash
+cd DoughFin_FE
+``` 
+3. Grab the dependencies: `npm install`
+ ```bash
+npm install
+``` 
+5. Fire up the app: `npm start`
 ```bash
 npm start
-```
+``` 
+----------------
+
 ## To Run Tests
 ```bash
-npx cypress open
+npm cypress open
 ```
-
 
 ## Configuration
 * port deconfliction
