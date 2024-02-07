@@ -5,17 +5,18 @@ import TransactionsTable from "../TransactionsTable/TransactionsTable";
 import Budget from "../Budget/Budget";
 
 const Dashboard = ({
-  income,
-  setIncome,
   totalIncome,
   setTotalIncome,
-  expenses,
   totalExpenses,
   setTotalExpenses,
-  setExpenses,
-  incomeData,
-  expensesData,
+  incomeTransactions,
+  setIncomeTransactions,
+  expensesTransactions,
+  setExpensesTransactions,
 }) => {
+
+  
+
   return (
     <main className="dashboard">
       <section className="dashboard-section">
@@ -24,24 +25,20 @@ const Dashboard = ({
         <div className="dashboard-totals-container">
           <Total
             totalType={"Total Income:"}
-            setIncome={setIncome}
+            setIncomeTransactions={setIncomeTransactions}
             totalAmount={totalIncome}
             setTotalIncome={setTotalIncome}
-            totalPercentage={incomeData.data.currentIncome.pctChange.toString()}
           />
           <Total
             totalType={"Total Expenses:"}
-            setExpenses={setExpenses}
+            setExpensesTransactions={setExpensesTransactions} 
             totalAmount={totalExpenses}
             setTotalExpenses={setTotalExpenses}
-            totalPercentage={expensesData.data.currentExpenses.pctChange.toString()}
           />
         </div>
         <TransactionsTable
-          income={income}
-          setIncome={setIncome}
-          expenses={expenses}
-          setExpenses={setExpenses}
+          incomeTransactions={incomeTransactions}
+          expensesTransactions={expensesTransactions}
         />
       </section>
       <Budget />
