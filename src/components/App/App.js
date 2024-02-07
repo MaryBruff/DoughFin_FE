@@ -6,7 +6,7 @@ import cashflowData from "../../CashFlowData.json"
 import incomeData from "../../IncomeData.json"
 import expensesData from "../../ExpensesData.json"
 import './App.css';
-import FinanceData from "../../fetchCalls"
+
 
 const App = () => {
   const [income, setIncome] = useState(transactionsData.data.income);

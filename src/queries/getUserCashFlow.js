@@ -11,6 +11,6 @@ query GetUserCashflow($userId: ID!) {
               income
               expenses
           }
-      }
+     }
   }
 }`
