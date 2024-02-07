@@ -3,30 +3,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
-import {
-  ApolloProvider,
-  ApolloClient,
-  InMemoryCache,
-  HttpLink,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+import { ApolloProvider } from '@apollo/client';
+import { client } from './components/apollo-client/apollo-client';
 
-const httpLink = new HttpLink({
-  uri: "https://2a2e2497-8ab5-4226-865f-0cb51ab695c6.mock.pstmn.io/graphql",
-});
-const customHeaders = setContext((_, { headers }) => {
-  return {
-    headers: {
-      "x-mock-match-request-body": true,
-    },
-  };
-});
-const client = new ApolloClient({
-  // uri: "https://doughfin-be.onrender.com/graphql",
-  link: customHeaders.concat(httpLink),
-  cache: new InMemoryCache(),
-});
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <ApolloProvider client={client}>
     <React.StrictMode>
