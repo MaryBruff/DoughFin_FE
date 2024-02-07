@@ -21,10 +21,10 @@ const style = {
 const Total = ({
   totalType,
   totalAmount,
-  setIncome,
-  setTotalIncome,
-  setExpenses,
   setTotalExpenses,
+  setTotalIncome,
+  setIncomeTransactions,
+  setExpensesTransactions,
 }) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -39,10 +39,10 @@ const Total = ({
 
     const newTransaction = {
       id: Date.now(),
-      description: totalType === "Total Expenses:" ? name : null,
-      source: totalType === "Total Income:" ? name : null,
+      category: name,
       date: date,
       amount: parseFloat(amount),
+      type: totalType === "Total Income:" ? "income" : "expense",
     };
 
     const clearForm = () => {
@@ -52,12 +52,12 @@ const Total = ({
     };
 
     if (totalType === "Total Income:") {
-      setIncome((prev) => [...prev, newTransaction]);
+      setIncomeTransactions((prev) => [...prev, newTransaction]);
       setTotalIncome(
         (prevTotalIncome) => parseFloat(prevTotalIncome) + parseFloat(newTransaction.amount)
       );
     } else if (totalType === "Total Expenses:") {
-      setExpenses((prev) => [...prev, newTransaction]);
+      setExpensesTransactions((prev) => [...prev, newTransaction]);
       setTotalExpenses(
         (prevTotalExpenses) => parseFloat(prevTotalExpenses) + parseFloat(newTransaction.amount)
       );
