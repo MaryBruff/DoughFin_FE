@@ -1,24 +1,24 @@
 import React from "react";
 import "./TransactionsTable.css";
 
-const TransactionsTable = ({ income, expenses }) => {
-  const incomeTransactions = income.map((transaction) => {
+const TransactionsTable = ({ incomeTransactions, expensesTransactions }) => {
+  const incomeEntries = incomeTransactions && incomeTransactions.map((transaction) => {
     return (
-      <tr key={transaction.id}className="transactions-tr">
-        <td>{transaction.source}</td>
+      <tr className="transactions-tr" key={transaction.id}>
+        <td>{transaction.vendor}</td>
         <td>{transaction.date}</td>
         <td>${transaction.amount}</td>
-        <td style={{ color: '#02B15A' }}  className="transactions-status-text">Income</td>
+        <td style={{ color: '#02B15A' }} className="transactions-status-text">{transaction.status}</td>
       </tr>
     );
   });
-  const expenseTransactions = expenses.map((transaction) => {
+  const expenseEntries = expensesTransactions && expensesTransactions.map((transaction) => {
     return (
       <tr className="transactions-tr" key={transaction.id}>
-        <td>{transaction.description}</td>
+        <td>{transaction.vendor}</td>
         <td>{transaction.date}</td>
         <td>${transaction.amount}</td>
-        <td style={{ color: '#E41414' }} className="transactions-status-text">Expense</td>
+        <td style={{ color: '#E41414' }} className="transactions-status-text">{transaction.status}</td>
       </tr>
     );
   });
@@ -44,10 +44,10 @@ const TransactionsTable = ({ income, expenses }) => {
               <th>Name</th>
               <th>Date</th>
               <th>Amount</th>
-              <th>Type</th>
+              <th>Status</th>
             </tr>
           </thead>
-          <tbody>{incomeTransactions}{expenseTransactions}
+          <tbody>{incomeEntries}{expenseEntries}
           </tbody>
         </table>
       </div>
