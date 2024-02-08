@@ -3,10 +3,10 @@ name: Cypress Specs
 on:
   push:
     branches:
-      - feature/df-49-cicd-vercel
+      - main
   pull_request:
     branches:
-      - feature/df-49-cicd-vercel
+      - main
 
 
 jobs:
