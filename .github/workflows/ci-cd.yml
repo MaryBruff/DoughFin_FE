@@ -16,8 +16,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.15.1'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: true
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
           start: npm start
