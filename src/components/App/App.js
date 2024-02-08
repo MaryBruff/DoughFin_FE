@@ -24,10 +24,10 @@ const App = () => {
   const userName = "Powdered Toast Man";
   const email = "moneybaggins@bigbanktakelilbank.doge"
   
-  const { loading: loadingIncomes, error: errorIncomes, totalIncomeData } = useGetIncomes(email);
-  const { loading: loadingExpenses, error: errorExpenses, totalExpensesData } = useGetExpenses(email);
-  const { loading: loadingTransactions, error: errorTransactions, transactionsData } = useGetTransactions(email);
-  const { loading: loadingCashFlow, error: errorCashFlow, cashFlowData } = useGetCashFlow(email);
+  const { totalIncomeData } = useGetIncomes(email);
+  const { totalExpensesData } = useGetExpenses(email);
+  const { transactionsData } = useGetTransactions(email);
+  const { cashFlowData } = useGetCashFlow(email);
 
   useEffect(() => {
     if (totalIncomeData) setTotalIncome(totalIncomeData);
