@@ -25,7 +25,6 @@ const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState("");
-
   // Bilbo's UID
   const userId = "2"
 
@@ -36,6 +35,7 @@ const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const amountCents = Math.round(parseFloat(amount) * 100);
 
     try {
       const { data } = await createExpense({
@@ -43,7 +43,7 @@ const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
           userId, 
           vendor,
           category,
-          amount: parseFloat(amount),
+          amount: amountCents,
           date,
         },
       });
@@ -52,13 +52,13 @@ const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
         id: data.createExpense.id,
         vendor,
         date,
-        amount: parseFloat(amount),
+        amount: amountCents,
         category,
         status: "debited",
       };
 
       setTransactions(prev => [...prev, newTransaction]);
-      setTotalExpenses(prevTotal => parseFloat(prevTotal) + parseFloat(amount));
+      setTotalExpenses(prevTotalExpenses => prevTotalExpenses + amountCents);
 
       setVendor("");
       setCategory("");
@@ -245,7 +245,9 @@ const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
         </Modal>
         <div className="transx-text-flex">
           <p className="transx-text">Total Expenses:</p>
-          <p className="transx-amount">{totalExpenses ? totalExpenses : "$0.00"}</p>
+          <p className="transx-amount">
+            {(totalExpenses / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+          </p>
         </div>
       </div>
     </summary>

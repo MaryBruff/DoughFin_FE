@@ -22,7 +22,7 @@ const style = {
 const AddIncome = ({ totalIncome, setTotalIncome, setTransactions }) => {
   const [open, setOpen] = useState(false);
   const [source, setSource] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
 
   // Bilbo's UID
@@ -35,27 +35,28 @@ const AddIncome = ({ totalIncome, setTotalIncome, setTransactions }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const amountCents = Math.round(parseFloat(amount) * 100);
 
     try {
       const { data } = await createIncome({
         variables: {
           userId, 
           source,
-          amount: parseFloat(amount),
+          amount: amountCents,
           date,
         },
       });
-      console.log("data: ", data);
+      
       const newTransaction = {
         id: data.createIncome.id,
         vendor: source,
         date,
-        amount: parseFloat(amount),
+        amount: amountCents,
         status: "credited",
       };
-
+  
       setTransactions(prev => [...prev, newTransaction]);
-      setTotalIncome(prevTotalIncome => prevTotalIncome ? parseFloat(prevTotalIncome) + parseFloat(newTransaction.amount) : parseFloat(newTransaction.amount));
+      setTotalIncome(prevTotalIncome => prevTotalIncome + amountCents);
 
       setSource("");
       setAmount("");
@@ -207,7 +208,9 @@ const AddIncome = ({ totalIncome, setTotalIncome, setTransactions }) => {
         </Modal>
         <div className="transx-text-flex">
           <p className="transx-text">Total Income:</p>
-          <p className="transx-amount">{totalIncome ? totalIncome : "$0.00"}</p>
+          <p className="transx-amount">
+            {(totalIncome / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+          </p>
         </div>
       </div>
     </summary>
