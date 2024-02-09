@@ -16,7 +16,7 @@ export const useGetExpenses = (email) => {
   });
   let totalExpensesData = null;
   if (!loading && data) {
-    totalExpensesData = data?.user?.currentExpenses?.amount?.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    totalExpensesData = data?.user?.currentExpenses?.amount;
   }
   return { loading, error, totalExpensesData };
 };
