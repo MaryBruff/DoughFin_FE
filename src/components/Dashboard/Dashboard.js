@@ -1,6 +1,5 @@
 import React from "react";
 import "./Dashboard.css";
-import Total from "../Total/Total";
 import TransactionsTable from "../TransactionsTable/TransactionsTable";
 import Budget from "../Budget/Budget";
 import CashFlow from "../CashFlow/CashFlow";
@@ -15,10 +14,6 @@ const Dashboard = ({
   setTotalIncome,
   totalExpenses,
   setTotalExpenses,
-  incomeTransactions,
-  setIncomeTransactions,
-  expensesTransactions,
-  setExpensesTransactions,
 }) => {
 
   
