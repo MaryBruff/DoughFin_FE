@@ -42,7 +42,7 @@ const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
         variables: {
           userId, 
           vendor,
-          cat: category,
+          category,
           amount: amountCents,
           date,
         },
