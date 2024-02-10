@@ -40,7 +40,7 @@ const AddIncome = ({ totalIncome, setTotalIncome, setTransactions }) => {
     try {
       const { data } = await createIncome({
         variables: {
-          userId, 
+          userId,
           source,
           amount: amountCents,
           date,
