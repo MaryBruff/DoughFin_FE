@@ -21,6 +21,7 @@ const App = () => {
   // Hardcoded user, will pull from getUser endpoint soon
   const userName = "Powdered Toast Man";
   const email = "moneybaggins@bigbanktakelilbank.doge"
+  localStorage.setItem('email', 'user@example.com');
   
   const { totalIncomeData } = useGetIncomes(email);
   const { totalExpensesData } = useGetExpenses(email);
