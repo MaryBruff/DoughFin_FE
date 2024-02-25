@@ -25,8 +25,8 @@ const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState("");
-  // Bilbo's UID
-  const userId = "2"
+
+  const userId = 1;
 
   const { createExpense } = useCreateExpense();
 
@@ -35,7 +35,7 @@ const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const amountCents = Math.round(parseFloat(amount) * 100);
+    const amountFloat = parseFloat(amount);
 
     try {
       const { data } = await createExpense({
@@ -43,22 +43,24 @@ const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
           userId, 
           vendor,
           category,
-          amount: amountCents,
+          amount: amountFloat,
           date,
         },
       });
+      if (data && data.createExpense) {
+        setTransactions(prevTransactions => [...prevTransactions, {
+          id: data.createExpense.id, 
+          vendor: data.createExpense.expense.vendor,
+          amount: data.createExpense.expense.amount,
+          date: data.createExpense.expense.date,
+          status: "debited", 
+        }]);
 
-      const newTransaction = {
-        id: data.createExpense.id,
-        vendor,
-        date,
-        amount: amountCents,
-        category,
-        status: "debited",
-      };
-
-      setTransactions(prev => [...prev, newTransaction]);
-      setTotalExpenses(prevTotalExpenses => prevTotalExpenses + amountCents);
+        if (data.createExpense.expense.amount) {
+          const newExpenseCents = Math.round(parseFloat(data.createExpense.expense.amount) * 100);
+          setTotalExpenses(prevTotalExpenses => prevTotalExpenses + newExpenseCents);
+        }
+      }
 
       setVendor("");
       setCategory("");
@@ -67,7 +69,7 @@ const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
 
       handleClose();
     } catch (error) {
-      console.error("Error creating expense:", error);
+      console.error("Oh no, something went wrong 😭:", error);
     }
   };
 
