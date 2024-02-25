@@ -2,13 +2,14 @@ import React from "react";
 import "./TransactionsTable.css";
 
 const TransactionsTable = ({ transactions }) => {
-  const transactionEntries = transactions && transactions.map((transaction) => {
+  const transactionEntries = transactions && transactions.map((transaction, i) => {
     let statusColor = transaction.status === 'credited' ? '#02B15A' : '#E41414';
+    let vendorName = !transaction.vendor ? 'No Vendor' : transaction.vendor;
     return (
-      <tr className="transactions-tr" key={transaction.id}>
-        <td>{transaction.vendor}</td>
+      <tr className="transactions-tr" key={transactions.id}>
+        <td>{vendorName}</td>
         <td>{transaction.date}</td>
-        <td>{(transaction.amount / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+        <td>{(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
         <td style={{ color: statusColor }} className="transactions-status-text">{transaction.status}</td>
       </tr>
     );
