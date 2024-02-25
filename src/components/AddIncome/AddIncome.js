@@ -25,8 +25,7 @@ const AddIncome = ({ totalIncome, setTotalIncome, setTransactions }) => {
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
 
-  // Bilbo's UID
-  const userId = "2"
+  const userId = 1;
 
   const { createIncome } = useCreateIncome();
 
@@ -35,36 +34,41 @@ const AddIncome = ({ totalIncome, setTotalIncome, setTransactions }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const amountCents = Math.round(parseFloat(amount) * 100);
+    const amountFloat = parseFloat(amount);
 
     try {
       const { data } = await createIncome({
         variables: {
           userId,
           source,
-          amount: amountCents,
+          amount: amountFloat,
           date,
         },
       });
       
-      const newTransaction = {
-        id: data.createIncome.id,
-        vendor: source,
-        date,
-        amount: amountCents,
-        status: "credited",
-      };
-  
-      setTransactions(prev => [...prev, newTransaction]);
-      setTotalIncome(prevTotalIncome => prevTotalIncome + amountCents);
+      if (data && data.createIncome) {
+        console.log("data", data.createIncome.income);
+        setTransactions(prevTransactions => [...prevTransactions, {
+          id: data.createIncome.income.id, 
+          source: data.createIncome.income.source,
+          amount: data.createIncome.income.amount,
+          date: data.createIncome.income.date,
+          status: "credited", 
+        }]);
 
+        if (data.createIncome.income.amount) {
+          const newIncomeCents = Math.round(parseFloat(data.createIncome.income.amount) * 100);
+          setTotalIncome(prevTotalIncome => prevTotalIncome + newIncomeCents);
+        }
+      }
+    
       setSource("");
       setAmount("");
       setDate("");
-
+    
       handleClose();
     } catch (error) {
-      console.error("Error creating income: ", error);
+      console.error("Oh no, something went wrong 😭:", error);
     }
   };
 
@@ -130,6 +134,9 @@ const AddIncome = ({ totalIncome, setTotalIncome, setTransactions }) => {
                 }}
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
+                inputProps={{
+                  max: new Date().toISOString().split('T')[0], // dynamically set the max date to today
+                }}
                 sx={{
                   "& label.Mui-focused": {
                     color: "#AFA0FF",
