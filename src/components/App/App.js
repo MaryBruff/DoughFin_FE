@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import NavBar from '../NavBar/NavBar'
 import Dashboard from '../Dashboard/Dashboard'
-// import cashflowData from "../sample-data/CashFlowData.json"
-// import transactionsFixtureData from "../sample-data/TransactionsData.json"
-// import incomeData from "../sample-data/IncomeData.json"
-// import expensesData from "../sample-data/ExpensesData.json"
 import './App.css';
+import { useDispatch } from 'react-redux'
+import { setTotalIncome } from '../../store/slices/totalIncomeSlice';
+import { setTotalExpenses } from '../../store/slices/totalExpensesSlice';
+import { setTransactions } from '../../store/slices/transactionsSlice';
+import { setCashFlow } from '../../store/slices/cashFlowSlice';
 import { useGetIncomes } from '../apollo-client/queries/getIncomes';
 import { useGetExpenses } from '../apollo-client/queries/getExpenses';
 import { useGetTransactions } from '../apollo-client/queries/getTransactions';
@@ -13,10 +14,7 @@ import { useGetCashFlow } from '../apollo-client/queries/getCashFlow';
 
 
 const App = () => {
-  const [transactions, setTransactions] = useState([]);
-  const [totalIncome, setTotalIncome] = useState(0);
-  const [totalExpenses, setTotalExpenses] = useState(0);
-  const [cashFlow, setCashFlow] = useState(null);
+  const dispatch = useDispatch();
 
   // Hardcoded user, will pull from getUser endpoint soon
   const userName = "Powdered Toast Man";
@@ -30,28 +28,20 @@ const App = () => {
   useEffect(() => {
     if (totalIncomeData) {
       const totalIncomeCents = Math.round(parseFloat(totalIncomeData) * 100);
-      setTotalIncome(totalIncomeCents);
+      dispatch(setTotalIncome(totalIncomeCents));
     }
     if (totalExpensesData) {
       const totalExpensesCents = Math.round(parseFloat(totalExpensesData) * 100);
-      setTotalExpenses(totalExpensesCents);
+      dispatch(setTotalExpenses(totalExpensesCents));
     }
-    if (transactionsData) setTransactions(transactionsData);
-    if (cashFlowData) setCashFlow(cashFlowData);
-  }, [totalIncomeData, totalExpensesData, transactionsData, cashFlowData]);
+    if (transactionsData) dispatch(setTransactions(transactionsData));
+    if (cashFlowData) dispatch(setCashFlow(cashFlowData));
+  }, [totalIncomeData, totalExpensesData, transactionsData, cashFlowData, dispatch]);
 
   return (
     <main className='app'>
       <NavBar userName={userName} />
-      <Dashboard
-        cashFlow={cashFlow}
-        transactions={transactions}
-        setTransactions={setTransactions}
-        totalIncome={totalIncome}
-        setTotalIncome={setTotalIncome}
-        totalExpenses={totalExpenses}
-        setTotalExpenses={setTotalExpenses}
-      />
+      <Dashboard />
     </main>
   )
 }
