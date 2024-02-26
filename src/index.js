@@ -5,15 +5,19 @@ import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import { ApolloProvider } from '@apollo/client';
 import { client } from './components/apollo-client/apollo-client';
+import store from "./store/store";
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <ApolloProvider client={client}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </ApolloProvider>
+  <Provider store={store}>
+    <ApolloProvider client={client}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </ApolloProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
