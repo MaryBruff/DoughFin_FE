@@ -5,7 +5,7 @@ import BasicSelect from './BasicSelect'
 import EllipsePurple from '../../assets/icons/Ellipse-purple.svg'
 import EllipseBlue from '../../assets/icons/Ellipse-blue.svg'
 
-const CashFlow = ({ cashFlow }) => {
+const CashFlow = () => {
   return (
     <main className='cashflow'>
       <header className='cashflow-header'>
@@ -20,9 +20,7 @@ const CashFlow = ({ cashFlow }) => {
         </div>
         <BasicSelect />
       </header>
-      <BarChart 
-        cashFlow={cashFlow}
-      />
+      <BarChart />
     </main>
   )
 };

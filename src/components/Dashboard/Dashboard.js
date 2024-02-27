@@ -6,39 +6,16 @@ import CashFlow from "../CashFlow/CashFlow";
 import AddExpense from "../AddExpense/AddExpense";
 import AddIncome from "../AddIncome/AddIncome";
 
-const Dashboard = ({
-  cashFlow,
-  transactions,
-  setTransactions,
-  totalIncome,
-  setTotalIncome,
-  totalExpenses,
-  setTotalExpenses,
-}) => {
-
-  
-
+const Dashboard = ({}) => {
   return (
     <main className="dashboard">
       <section className="dashboard-section">
-        <CashFlow 
-          cashFlow={cashFlow}
-        />
+        <CashFlow />
         <div className="dashboard-totals-container">
-          <AddIncome
-            totalIncome={totalIncome}
-            setTotalIncome={setTotalIncome}
-            setTransactions={setTransactions}
-          />
-          <AddExpense
-            totalExpenses={totalExpenses}
-            setTotalExpenses={setTotalExpenses}
-            setTransactions={setTransactions}
-          />
+          <AddIncome/>
+          <AddExpense/>
         </div>
-        <TransactionsTable
-          transactions={transactions}
-        />
+        <TransactionsTable/>
       </section>
       <Budget />
     </main>

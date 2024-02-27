@@ -1,20 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TransactionsTable.css";
+import { useSelector } from 'react-redux';
 
-const TransactionsTable = ({ transactions }) => {
-  const transactionEntries = transactions && transactions.map((transaction, i) => {
+const TransactionsTable = () => {
+  const transactions = useSelector((state) => state.transactions.items);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+
+  const filteredTransactions = transactions.filter(transaction => {
+    let vendorName = transaction.vendor ? transaction.vendor.toLowerCase() : 'no vendor';
+    return vendorName.includes(searchQuery);
+  });
+
+  const transactionEntries = filteredTransactions.map((transaction, i) => {
     let statusColor = transaction.status === 'credited' ? '#02B15A' : '#E41414';
     let vendorName = !transaction.vendor ? 'No Vendor' : transaction.vendor;
+    const vendorNameUpper = vendorName.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     return (
-      <tr className="transactions-tr" key={transactions.id}>
-        <td>{vendorName}</td>
+      <tr className="transactions-tr" key={i}>
+        <td>{vendorNameUpper}</td>
         <td>{transaction.date}</td>
         <td>{(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
         <td style={{ color: statusColor }} className="transactions-status-text">{transaction.status}</td>
       </tr>
     );
   });
-  
+
   return (
     <section className="transactions">
       <header className="transactions-header">
@@ -25,6 +39,7 @@ const TransactionsTable = ({ transactions }) => {
               className="searchbar-text"
               type="text"
               placeholder="Search..."
+              onChange={handleSearchChange} 
             />
             <button className="searchbar-button"></button>
           </div>

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { Modal, Box, TextField, Button, Typography } from "@mui/material";
 import './AddExpense.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { incrementTotalExpenses } from '../../store/slices/totalExpensesSlice'
+import { setTransactions } from '../../store/slices/transactionsSlice' 
+import { Modal, Box, TextField, Button, Typography } from "@mui/material";
 import PlusIcon from "../../assets/icons/white-plus-icon.svg";
 import { useCreateExpense } from "../apollo-client/mutations/createExpense";
 
@@ -19,7 +22,10 @@ const style = {
   color: "#FFF",
 };
 
-const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
+const AddExpense = () => {
+  const dispatch = useDispatch();
+  const totalExpenses = useSelector((state) => state.totalExpenses.value);
+
   const [open, setOpen] = useState(false);
   const [vendor, setVendor] = useState("");
   const [category, setCategory] = useState("");
@@ -48,17 +54,19 @@ const AddExpense = ({ totalExpenses, setTotalExpenses, setTransactions }) => {
         },
       });
       if (data && data.createExpense) {
-        setTransactions(prevTransactions => [...prevTransactions, {
+        const newTransaction = {
           id: data.createExpense.id, 
           vendor: data.createExpense.expense.vendor,
           amount: data.createExpense.expense.amount,
           date: data.createExpense.expense.date,
-          status: "debited", 
-        }]);
+          status: "debited",
+        };
+
+        dispatch(setTransactions(newTransaction));
 
         if (data.createExpense.expense.amount) {
           const newExpenseCents = Math.round(parseFloat(data.createExpense.expense.amount) * 100);
-          setTotalExpenses(prevTotalExpenses => prevTotalExpenses + newExpenseCents);
+          dispatch(incrementTotalExpenses(newExpenseCents));
         }
       }
 

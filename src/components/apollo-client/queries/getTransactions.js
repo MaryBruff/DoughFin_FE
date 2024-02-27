@@ -17,6 +17,7 @@ query getTransactions($email: String!) {
 export const useGetTransactions = (email) => {
   const { loading, error, data } = useQuery(GET_TRANSACTIONS, {
     variables: { email: email },
+    fetchPolicy: "no-cache",
   });
   let transactionsData = null;
   if (!loading && data) {

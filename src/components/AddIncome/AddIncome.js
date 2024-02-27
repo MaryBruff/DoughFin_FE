@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import './AddIncome.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { incrementTotalIncome } from '../../store/slices/totalIncomeSlice'
+import { setTransactions } from '../../store/slices/transactionsSlice' 
 import { Modal, Box, TextField, Button, Typography } from "@mui/material";
 import PlusIcon from "../../assets/icons/white-plus-icon.svg";
 import { useCreateIncome } from "../apollo-client/mutations/createIncome";
@@ -19,7 +22,10 @@ const style = {
   color: "#FFF",
 };
 
-const AddIncome = ({ totalIncome, setTotalIncome, setTransactions }) => {
+const AddIncome = () => {
+  const dispatch = useDispatch();
+  const totalIncome = useSelector((state) => state.totalIncome.value);
+
   const [open, setOpen] = useState(false);
   const [source, setSource] = useState("");
   const [amount, setAmount] = useState("");
@@ -47,18 +53,19 @@ const AddIncome = ({ totalIncome, setTotalIncome, setTransactions }) => {
       });
       
       if (data && data.createIncome) {
-        console.log("data", data.createIncome.income);
-        setTransactions(prevTransactions => [...prevTransactions, {
+        const newTransaction = {
           id: data.createIncome.income.id, 
-          source: data.createIncome.income.source,
+          vendor: data.createIncome.income.source,
           amount: data.createIncome.income.amount,
           date: data.createIncome.income.date,
           status: "credited", 
-        }]);
+        };
+
+        dispatch(setTransactions(newTransaction));
 
         if (data.createIncome.income.amount) {
           const newIncomeCents = Math.round(parseFloat(data.createIncome.income.amount) * 100);
-          setTotalIncome(prevTotalIncome => prevTotalIncome + newIncomeCents);
+          dispatch(incrementTotalIncome(newIncomeCents));
         }
       }
     

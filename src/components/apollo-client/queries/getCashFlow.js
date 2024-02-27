@@ -16,6 +16,7 @@ query getCashflows($email: String!) {
 export const useGetCashFlow = (email) => {
   const { loading, error, data } = useQuery(GET_CASH_FLOW, {
     variables: { email: email },
+    fetchPolicy: "no-cache",
   });
   let cashFlowData = null;
   if (!loading && data) {
