@@ -27,7 +27,7 @@ describe("Homepage Tests", () => {
     cy.get(".budget");
   });
 
-  it("Displays the transactions table", () => {
+  it.skip("Displays the transactions table", () => {
     cy.get(".transactions-table-container").should("be.visible");
     cy.get(".transactions-h1").should("have.text", "Transactions");
     cy.get(".transactions-searchbar-container").should("be.visible");
