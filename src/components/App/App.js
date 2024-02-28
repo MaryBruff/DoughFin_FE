@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import NavBar from '../NavBar/NavBar'
 import Dashboard from '../Dashboard/Dashboard'
 import './App.css';
@@ -16,7 +16,6 @@ import { useGetCashFlow } from '../apollo-client/queries/getCashFlow';
 const App = () => {
   const dispatch = useDispatch();
 
-  // Testing the CI/CD pipeline! 🤓 💞
   // Hardcoded user, will pull from getUser endpoint soon
   const userName = "Powdered Toast Man";
   const email = "email@email.com"
