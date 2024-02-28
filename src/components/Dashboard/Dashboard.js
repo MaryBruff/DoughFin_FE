@@ -6,7 +6,7 @@ import CashFlow from "../CashFlow/CashFlow";
 import AddExpense from "../AddExpense/AddExpense";
 import AddIncome from "../AddIncome/AddIncome";
 
-const Dashboard = ({}) => {
+const Dashboard = () => {
   return (
     <main className="dashboard">
       <section className="dashboard-section">
