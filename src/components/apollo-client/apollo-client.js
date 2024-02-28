@@ -1,10 +1,13 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
+const uri = process.env.REACT_APP_GRAPHQL_URI;
+
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL_URI,
+  uri: uri,
 });
 
+console.log("uri", uri);
 const customHeaders = setContext((_, { headers }) => {
   return {
     headers: {
